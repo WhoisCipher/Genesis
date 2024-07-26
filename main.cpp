@@ -2,38 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-class Health{
-private:
-    int maxHealth;
-    int currHealth;
-public:
-    Health() {
-        currHealth = maxHealth;
-    }
-    void takeDamage() {
-        currHealth -= GetRandomValue(1,10);
-    } 
-};
-
-class Player{
-protected:
-    Health health;
-    float PlayerSpeed = 3.5f;
-    Texture2D PlayerTexture = LoadTexture("Assets/IsoCharacter.png");
-    Rectangle PlayerIdleSourceRec = { 0, 0, 32, 32 };
-    Vector2 PlayerPos = {800 / 2, 450 / 2};
-};
-
-class PlayerCamera : Player{
-private:
-    Camera2D camera = { 0 };
-public:
-    PlayerCamera (){
-    camera.target = PlayerPos;
-    camera.offset = (Vector2){ (float)800 / 2, (float)400 / 2 };
-    camera.rotation = 0.0f;
-    camera.zoom = 2.0f;}
-};
 
 int main(void)
 {
@@ -91,7 +59,12 @@ int main(void)
     Texture2D healthBar = LoadTexture("Assets/HealthUI.png");
     Rectangle healthBarSrcRec = {0 , 0, 65, 20};
 
-    
+    // Camera Settings
+    Camera2D camera = { 0 };
+    camera.target = PlayerPos;
+    camera.offset = (Vector2){ (float)screenWidth / 2, (float)screenHeight / 2 };
+    camera.rotation = 0.0f;
+    camera.zoom = 2.0f;
 
     SetTargetFPS(60);
 
